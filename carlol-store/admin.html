@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>carlol — Product Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">carlol <span style="font-size:13px;color:var(--ink-soft);font-weight:400;letter-spacing:0;">/ admin</span></div>
+      <nav class="nav-links">
+        <a href="index.html">← Back to Store</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-wrap">
+    <h1>Products</h1>
+    <p class="sub">Add, edit, and remove products. When done, export and replace <code>products.js</code>.</p>
+
+    <form class="admin-form" id="productForm">
+      <input type="hidden" id="editId" />
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Product name</label>
+          <input type="text" id="name" required placeholder="e.g. Linen Throw Pillow" />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" id="category" placeholder="e.g. Home" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" step="0.01" min="0" required placeholder="48.00" />
+        </div>
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <select id="currency">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="CNY">CNY (¥)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="A short product description..."></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="imageUrl">Image URL <span style="color:var(--ink-soft);font-weight:400;">(or upload a file below)</span></label>
+        <input type="text" id="imageUrl" placeholder="https://..." />
+        <div style="display:flex;gap:12px;align-items:center;margin-top:8px;flex-wrap:wrap;">
+          <label class="btn-secondary" style="display:inline-block;cursor:pointer;">
+            Upload image
+            <input type="file" id="imageFile" accept="image/*" style="display:none;" />
+          </label>
+          <img id="imgPreview" class="img-preview" style="display:none;" alt="preview" />
+          <span id="imgStatus" style="font-size:13px;color:var(--ink-soft);"></span>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary" id="submitBtn">Add Product</button>
+        <button type="button" class="btn-secondary" id="cancelBtn" style="display:none;">Cancel</button>
+      </div>
+    </form>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px;">
+      <div style="font-weight:600;"><span id="prodCount">0</span> products</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-secondary" id="resetBtn">Reload from products.js</button>
+        <button class="btn-export" id="exportBtn">Save &amp; Download products.js</button>
+      </div>
+    </div>
+
+    <div class="admin-list" id="adminList"></div>
+  </main>
+
+  <script src="products.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
